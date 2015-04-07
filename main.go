@@ -13,15 +13,15 @@ import (
 )
 
 var (
-	flagRegion	string
+	flagRegion         string
 	flagNamespace      string
 	flagPeriod         int64
-	flagFetchPrevious	int
+	flagFetchPrevious  int
 	flagDimensionName  string
 	flagDimensionValue string
 	flagMetrics        string
 	flagList           bool
-	flagDump bool
+	flagDump           bool
 
 	dimensionNameRe  *regexp.Regexp
 	dimensionValueRe *regexp.Regexp
@@ -67,7 +67,7 @@ func init() {
 func getAvailableMetrics(cw *cloudwatch.CloudWatch, lmr *cloudwatch.ListMetricsInput) ([]*cloudwatch.Metric, error) {
 	metricsToRequest := make([]*cloudwatch.Metric, 0)
 
-	contList:
+contList:
 	resp, err := cw.ListMetrics(lmr)
 	if err != nil {
 		return nil, err
@@ -139,7 +139,8 @@ func fetchMetrics(cw *cloudwatch.CloudWatch, am []*cloudwatch.Metric) ([][]byte,
 			return nil, err
 		}
 
-		j, err := json.Marshal(resp); if err != nil {
+		j, err := json.Marshal(resp)
+		if err != nil {
 			return nil, err
 		}
 
